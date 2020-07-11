@@ -24,7 +24,7 @@ import org.springframework.lang.Nullable;
 @RequiredArgsConstructor(staticName = "of")
 public class Diary implements Streamable<DiaryEntry> {
 
-	private final Streamable<DiaryEntry> enties;
+	private final Streamable<DiaryEntry> entries;
 
 	public boolean contains(Encounter encounter) {
 		return getEntryFor(encounter).isPresent();
@@ -83,7 +83,7 @@ public class Diary implements Streamable<DiaryEntry> {
 	 */
 	@Override
 	public Iterator<DiaryEntry> iterator() {
-		return enties.iterator();
+		return entries.iterator();
 	}
 
 	private static Optional<DiaryEntry> getSlotEntryFrom(Slot slot, @Nullable Collection<DiaryEntry> sources) {
