@@ -32,21 +32,21 @@ public class Diary implements Streamable<DiaryEntry> {
 
 	public Optional<DiaryEntry> getEntryFor(Encounter encounter) {
 
-		return enties.stream()
+		return entries.stream()
 				.filter(it -> it.containsEncounterWith(encounter.getContact()))
 				.findFirst();
 	}
 
 	public Optional<DiaryEntry> getEntryFor(DiaryEntryIdentifier identifier) {
 
-		return enties.stream()
+		return entries.stream()
 				.filter(it -> it.hasId(identifier))
 				.findFirst();
 	}
 
 	public Stream<DiaryEntryDay> toEntryDays(LocalDate startDate) {
 
-		var byDate = enties.stream()
+		var byDate = entries.stream()
 				.collect(groupingBy(DiaryEntry::getSlotDate));
 
 		return Stream.iterate(LocalDate.now(),
@@ -64,13 +64,13 @@ public class Diary implements Streamable<DiaryEntry> {
 
 	public boolean containsCurrentEntry() {
 
-		return enties.stream()
+		return entries.stream()
 				.anyMatch(it -> it.hasSlot(Slot.now()));
 	}
 
 	public Optional<LocalDate> getDateOfFirstEncounterWith(ContactPerson contact) {
 
-		return enties.stream()
+		return entries.stream()
 				.filter(it -> it.containsEncounterWith(contact))
 				.map(DiaryEntry::getSlotDate)
 				.sorted()

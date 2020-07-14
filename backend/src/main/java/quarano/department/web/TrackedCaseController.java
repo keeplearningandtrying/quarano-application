@@ -354,7 +354,8 @@ class TrackedCaseController {
 
 		var diary = diaries.findDiaryFor(trackedCase.getTrackedPerson());
 
-		return diary.stream().map(representations::toDiaryEntrySummary);
+		return diary.stream()
+				.map(representations::toDiaryEntrySummary);
 	}
 
 	@SuppressWarnings("null")
